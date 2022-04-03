@@ -1,0 +1,76 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    nginx:
+        container_name: excel-parser-nginx
+        image: nginx:stable-alpine
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - laravel-echo
+        networks:
+            - excel-parser
+    laravel-echo:
+        container_name: excel-parser-laravel-echo
+        build:
+            context: .
+            dockerfile: docker/DockerFileLaravelEcho
+        ports:
+            - '6001:6001'
+        volumes:
+            - .:/var/www/html
+        networks:
+            - excel-parser
+        depends_on:
+            - php
+    php:
+        container_name: excel-parser-php
+        build:
+            context: .
+            dockerfile: docker/DockerFilePhp
+        ports:
+            - '9000:9000'
+            - '8000:8000'
+        volumes:
+            - .:/var/www/html
+        networks:
+            - excel-parser
+        depends_on:
+            - mariadb
+            - redis
+            - rabbitmq
+    mariadb:
+        container_name: excel-parser-mariadb
+        image: mariadb
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - excel-parser
+    redis:
+        container_name: excel-parser-redis
+        image: redis:alpine
+        ports:
+            - '6379:6379'
+        networks:
+            - excel-parser
+    rabbitmq:
+        container_name: excel-parser-rabbitmq
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        networks:
+            - excel-parser
+networks:
+    excel-parser:
+        driver: bridge
