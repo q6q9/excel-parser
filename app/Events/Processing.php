@@ -4,8 +4,6 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -22,11 +20,21 @@ class Processing implements ShouldBroadcast
     public $percent;
 
     /**
+     * @var int
+     */
+    public $channelID;
+
+    /**
      * @param int $percent
      */
-    public function __construct($percent)
+    public function __construct($percent, $channelID)
     {
+        if ($percent < 0 || $percent > 100) {
+            throw new \InvalidArgumentException('Percent value out of range');
+        }
+
         $this->percent = $percent;
+        $this->channelID = $channelID   ;
     }
 
     /**
@@ -36,6 +44,6 @@ class Processing implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('processing');
+        return new Channel('processing.' . $this->channelID);
     }
 }

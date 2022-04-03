@@ -38,7 +38,8 @@ services:
         depends_on:
             - queue
     queue:
-        container_name: excel-parser-queue
+        #container_name: excel-parser-queue
+        restart: always
         build:
             context: .
             dockerfile: docker/DockerFileQueue
