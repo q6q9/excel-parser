@@ -31,5 +31,5 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http:/google.com' + ':6001'
+    host: window.location.host + ':6001'
 });
