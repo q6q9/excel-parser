@@ -2278,7 +2278,7 @@ window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.i
 
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'socket.io',
-  host: window.location.hostname + '/socket.io:6001'
+  host: 'http:/google.com' + ':6001'
 });
 
 /***/ }),
@@ -2621,8 +2621,8 @@ function fromByteArray (uint8) {
 var BlobBuilder = typeof BlobBuilder !== 'undefined' ? BlobBuilder :
   typeof WebKitBlobBuilder !== 'undefined' ? WebKitBlobBuilder :
   typeof MSBlobBuilder !== 'undefined' ? MSBlobBuilder :
-  typeof MozBlobBuilder !== 'undefined' ? MozBlobBuilder : 
-  false;
+      typeof MozBlobBuilder !== 'undefined' ? MozBlobBuilder :
+          false;
 
 /**
  * Check if Blob constructor is supported
@@ -2694,11 +2694,11 @@ function BlobBuilderConstructor(ary, options) {
   });
 
   return (options.type) ? bb.getBlob(options.type) : bb.getBlob();
-};
+}
 
 function BlobConstructor(ary, options) {
   return new Blob(mapArrayBufferViews(ary), options || {});
-};
+}
 
 if (typeof Blob !== 'undefined') {
   BlobBuilderConstructor.prototype = Blob.prototype;
@@ -4574,7 +4574,7 @@ if (true) {
 
 function Emitter(obj) {
   if (obj) return mixin(obj);
-};
+}
 
 /**
  * Mixin the emitter properties.
@@ -31112,8 +31112,8 @@ module.exports = yeast;
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
+    /******/
+    /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
@@ -31126,21 +31126,22 @@ module.exports = yeast;
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
+        /******/
+        /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Flag the module as loaded
+        /******/
+        /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/ 	
-/******/ 		// Return the exports of the module
+        /******/
+        /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
+
+    /******/
+    /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/************************************************************************/
+    /******/
+    /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];
@@ -31172,8 +31173,8 @@ module.exports = yeast;
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
+    /******/
+    /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
 /******/ 		__webpack_require__.d = (exports, definition) => {
@@ -31184,8 +31185,8 @@ module.exports = yeast;
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
+    /******/
+    /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
 /******/ 			if (typeof globalThis === 'object') return globalThis;
@@ -31196,13 +31197,13 @@ module.exports = yeast;
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+    /******/
+    /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
+    /******/
+    /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
 /******/ 		__webpack_require__.r = (exports) => {
@@ -31212,8 +31213,8 @@ module.exports = yeast;
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/node module decorator */
+    /******/
+    /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
 /******/ 			module.paths = [];
@@ -31221,32 +31222,32 @@ module.exports = yeast;
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
+    /******/
+    /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
+        /******/
+        /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
+        /******/
+        /******/ 		// no chunk on demand loading
+        /******/
+        /******/ 		// no prefetching
+        /******/
+        /******/ 		// no preloaded
+        /******/
+        /******/ 		// no HMR
+        /******/
+        /******/ 		// no HMR manifest
+        /******/
+        /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+        /******/
+        /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
@@ -31270,20 +31271,20 @@ module.exports = yeast;
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+        /******/
+        /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
+    /******/
+    /************************************************************************/
+    /******/
+    /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
-/******/ })()
+    /******/
+    /******/ })()
 ;

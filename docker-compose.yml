@@ -37,11 +37,12 @@ services:
             - excel-parser
         depends_on:
             - queue
+        command: [ '/bin/sh', '-c', 'composer update && npm run watch' ]
     queue:
         container_name: excel-parser-queue
         build:
             context: .
-            dockerfile: docker/DockerFilePhp
+            dockerfile: docker/DockerFileQueue
         volumes:
             - .:/var/www/html
         depends_on:
