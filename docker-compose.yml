@@ -31,17 +31,26 @@ services:
         build:
             context: .
             dockerfile: docker/DockerFilePhp
-        ports:
-            - '9000:9000'
-            - '8000:8000'
         volumes:
             - .:/var/www/html
         networks:
             - excel-parser
         depends_on:
+            - queue
+    queue:
+        container_name: excel-parser-queue
+        build:
+            context: .
+            dockerfile: docker/DockerFilePhp
+        volumes:
+            - .:/var/www/html
+        depends_on:
             - mariadb
             - redis
             - rabbitmq
+        networks:
+            - excel-parser
+        command: [ '/bin/sh', '-c', 'php artisan queue:work --sleep=0.05' ]
     mariadb:
         container_name: excel-parser-mariadb
         image: mariadb
