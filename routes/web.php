@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',  [\App\Http\Controllers\ExcelController::class, 'index']);
 Route::post('/upload', [\App\Http\Controllers\ExcelController::class, 'upload'])->name('upload');
+
+Route::get('/rows',  [\App\Http\Controllers\RowsController::class, 'index']);
 

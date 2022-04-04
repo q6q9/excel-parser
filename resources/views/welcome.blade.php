@@ -20,11 +20,9 @@
                 <input id="excel" type="file" class="form-control {{ $errors->has('excel') ? ' is-invalid' : '' }}"
                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                        name="excel" value="{{ old('excel') }}" autofocus/>
-                @if ($errors->has('excel'))
-                    <span class="invalid-feedback" role="alert">
+                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('excel') }}</strong>
                                     </span>
-                @endif
             </div>
         </div>
         <div class="form-group">
@@ -32,30 +30,60 @@
                 Upload
             </button>
         </div>
+
+        <div class="progress mt-5 mb-4">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <a href="/rows" id="btn-rows" class="btn btn-warning">Rows</a>
     </form>
+
 </div>
 </body>
 <script>
-    // window.Echo.channel('processing')
-    //     .listen('Processing', (percent) => {
-    //         console.log(percent)
-    //     })
-
     let form = document.querySelector('form')
+    let excelInput = document.querySelector('#excel')
+    let errorField = document.querySelector('.invalid-feedback strong')
+    let progressBar = document.querySelector('.progress-bar')
+
+    document.querySelector('.progress').style.display = 'none'
+    document.querySelector('#btn-rows').style.display = 'none'
+
     document.querySelector('button').addEventListener('click', function (e) {
         e.preventDefault()
+
+        document.querySelector('.progress').style.display = ''
+        progressBar.style.width = 0
 
         let data = new FormData(form)
         fetch('/upload', {
             method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
             body: data
         })
-            .then(res => res.json())
-            .then(({channel}) => {
-                window.Echo.channel('processing.' + channel)
-                    .listen('Processing', ({percent}) => {
-                        console.log(percent)
-                    })
+            .then(res => {
+                    return res.json()
+            })
+            .then(({channel, errors}) => {
+                if (errors) {
+                    if (!excelInput.classList.contains('is-invalid')) {
+                        excelInput.classList.add('is-invalid')
+                    }
+
+                    errorField.innerHTML = errors[Object.keys(errors)[0]]
+                } else {
+                    window.Echo.channel('processing.' + channel)
+                        .listen('Processing', ({percent}) => {
+                            progressBar.style.width = percent + '%'
+
+                            if (percent === 100) {
+                                document.querySelector('#btn-rows').style.display = ''
+                            }
+                        })
+                    excelInput.classList.remove('is-invalid')
+                }
             })
     })
 </script>

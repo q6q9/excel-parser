@@ -6,6 +6,7 @@ use App\Events\ExcelParsing;
 use App\Imports\RowImport;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Broadcast;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelParser implements ShouldQueue
@@ -28,11 +29,7 @@ class ExcelParser implements ShouldQueue
      */
     public function handle($excelParsing)
     {
-//        exit();
         $file = new UploadedFile($excelParsing->pathToExcel, '');
-//        $file = new UploadedFile(
-//            Storage::path('uploads/d50091f5-69ba-4c92-9dbe-44b87ded710c.xlsx')
-//            , '');
 
         Excel::import(new RowImport($file->getFilename()), $file->getRealPath());
     }

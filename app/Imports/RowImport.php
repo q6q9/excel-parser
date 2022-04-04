@@ -106,7 +106,7 @@ class RowImport implements
      */
     public function batchSize(): int
     {
-        return 1;
+        return 1000;
     }
 
     /**
