@@ -66,6 +66,20 @@ services:
             MYSQL_ROOT_PASSWORD: password
         networks:
             - excel-parser
+    mariadb-test:
+        container_name: excel-parser-mariadb-test
+        image: mariadb
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - excel-parser
     redis:
         container_name: excel-parser-redis
         image: redis:alpine

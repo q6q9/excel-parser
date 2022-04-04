@@ -6,7 +6,6 @@ use App\Events\ExcelParsing;
 use App\Imports\RowImport;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Broadcast;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelParser implements ShouldQueue
