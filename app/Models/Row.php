@@ -13,13 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Row extends Model
 {
-    /**
-     * @var string[]
-     */
     protected $fillable = [
         'name',
         'date'
     ];
+
+    protected $dates = ['date'];
 
     public $timestamps = false;
 }
