@@ -20,12 +20,13 @@ class Processing implements ShouldBroadcast
     public $percent;
 
     /**
-     * @var int
+     * @var string
      */
     public $channelID;
 
     /**
      * @param int $percent
+     * @param string $channelID
      */
     public function __construct($percent, $channelID)
     {
